@@ -1,4 +1,20 @@
-use t::TestYAMLOld tests => 7;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 7;
+use YAML::Old ();   # [CPAN #74687] must load before B::Deparse for B::Deparse < 0.71
+
+use B::Deparse;
+if (new B::Deparse -> coderef2text ( sub { no strict; 1; use strict; 1; })
+    =~ 'refs') {
+ local $/;
+ (my $data = <DATA>) =~ s/use strict/use strict 'refs'/g if $] < 5.015;
+ if ($B::Deparse::VERSION > 0.67 and $B::Deparse::VERSION < 0.71) { # [CPAN #73702]
+   $data =~ s/use warnings;/BEGIN {\${^WARNING_BITS} = "UUUUUUUUUUUU\\001"}/g;
+ }
+ open DATA, '<', \$data;
+}
 
 no_diff;
 run_roundtrip_nyn('dumper');
@@ -7,7 +23,7 @@ __DATA__
 
 === a code ref
 +++ config
-local $YAML::Old::DumpCode = 1;
+local $YAML::DumpCode = 1;
 +++ perl
 package main;
 return sub { 'Something at least 30 chars' };
@@ -15,13 +31,13 @@ return sub { 'Something at least 30 chars' };
 --- !!perl/code |
 {
     use warnings;
-    use strict 'refs';
+    use strict;
     'Something at least 30 chars';
 }
 
 === an array of the same code ref
 +++ config
-local $YAML::Old::DumpCode = 1;
+local $YAML::DumpCode = 1;
 +++ perl
 package main;
 my $joe_random_global = sub { 'Something at least 30 chars' };
@@ -31,7 +47,7 @@ my $joe_random_global = sub { 'Something at least 30 chars' };
 - &1 !!perl/code |
   {
       use warnings;
-      use strict 'refs';
+      use strict;
       'Something at least 30 chars';
   }
 - *1
@@ -39,7 +55,7 @@ my $joe_random_global = sub { 'Something at least 30 chars' };
 
 === dummy code ref
 +++ config
-local $YAML::Old::DumpCode = 0;
+local $YAML::DumpCode = 0;
 +++ perl
 sub { 'Something at least 30 chars' }
 +++ yaml
@@ -47,7 +63,7 @@ sub { 'Something at least 30 chars' }
 
 === blessed code ref
 +++ config
-local $YAML::Old::DumpCode = 1;
+local $YAML::DumpCode = 1;
 +++ perl
 package main;
 bless sub { 'Something at least 30 chars' }, "Foo::Bar";
@@ -56,6 +72,6 @@ bless sub { 'Something at least 30 chars' }, "Foo::Bar";
 --- !!perl/code:Foo::Bar |
 {
     use warnings;
-    use strict 'refs';
+    use strict;
     'Something at least 30 chars';
 }

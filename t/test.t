@@ -1,3 +1,7 @@
-use t::TestYAMLOld tests => 1;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
 
-pass('TestYAMLOld framework loads');
+use TestYAML tests => 1;
+
+pass('TestYAML framework loads');

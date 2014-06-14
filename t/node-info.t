@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 16;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 16;
 use YAML::Old::Dumper;
 
 package StrIngy;

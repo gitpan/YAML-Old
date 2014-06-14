@@ -1,7 +1,14 @@
-use t::TestYAMLOld tests => 2;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 2;
 
 package Foo::Bar;
-use base 't::Base';
+
+use TestYAMLBase;
+
+our @ISA = 'TestYAMLBase';
 
 sub yaml_dump {
     my $self = shift;

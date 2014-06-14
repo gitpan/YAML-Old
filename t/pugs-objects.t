@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 2;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 2;
 
 {
     no warnings 'once';

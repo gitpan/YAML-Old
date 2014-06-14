@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 41;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 41;
 
 run_yaml_tests;
 
@@ -7,7 +11,7 @@ __DATA__
 === Ticket #105-A YAML doesn't serialize odd objects very well
 +++ skip_this_for_now
 +++ skip_unless_modules: FileHandle
-+++ perl: FileHandle->new( ">/tmp/$$" );
++++ perl: FileHandle->new( ">/tmp/yaml_bugs_rt_$$" );
 +++ yaml
 --- !!perl/io:FileHandle
 - xxx
@@ -90,7 +94,7 @@ version: 1.10
 
 
 
-=== Ticket #4784 Can't create YAML::Node from 'REF'
+=== Ticket #4784 Can't create YAML::Old::Node from 'REF'
 +++ skip_this_for_now
 +++ perl: my $bar = 1; my $foo = \\\$bar; bless $foo, "bar"
 +++ yaml

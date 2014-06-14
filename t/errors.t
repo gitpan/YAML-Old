@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 35;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 35;
 $^W = 1;
 
 use YAML::Old::Error;
@@ -20,7 +24,7 @@ sub mutate_yaml {
 sub check_yaml {
     my $yaml = shift;
     return $yaml unless ref($yaml);
-    print "YAML::Old actually loaded:\n" . Data::Dumper::Dumper($yaml);
+    print "YAML actually loaded:\n" . Data::Dumper::Dumper($yaml);
     return '';
 }
 
@@ -123,7 +127,7 @@ __DATA__
 #---
 #error: YAML_DUMP_USAGE_DUMPCODE
 #code: |
-#    local $YAML::Old::DumpCode = [0];
+#    local $YAML::DumpCode = [0];
 #    Dump(sub { $foo + 42 });
 
 === YAML_LOAD_ERR_FILE_INPUT
@@ -144,19 +148,19 @@ Test::YAML::DumpFile("x/y/z.yaml", 42);
 === YAML_DUMP_ERR_NO_HEADER
 +++ error: YAML_DUMP_ERR_NO_HEADER
 +++ perl
-local $YAML::Old::UseHeader = 0;
+local $YAML::UseHeader = 0;
 Test::YAML::Dump(42);
 
 === YAML_DUMP_ERR_NO_HEADER
 +++ error: YAML_DUMP_ERR_NO_HEADER
 +++ perl
-local $YAML::Old::UseHeader = 0;
+local $YAML::UseHeader = 0;
 Test::YAML::Dump([]);
 
 === YAML_DUMP_ERR_NO_HEADER
 +++ error: YAML_DUMP_ERR_NO_HEADER
 +++ perl
-local $YAML::Old::UseHeader = 0;
+local $YAML::UseHeader = 0;
 Test::YAML::Dump({});
 #---
 #error: xYAML_DUMP_WARN_BAD_NODE_TYPE
@@ -327,59 +331,59 @@ foo: bar
 #    ---
 #    foo: *bar
 
-# === YAML_LOAD_WARN_NO_REGEXP_IN_REGEXP 
-# +++ error: YAML_LOAD_WARN_NO_REGEXP_IN_REGEXP 
+# === YAML_LOAD_WARN_NO_REGEXP_IN_REGEXP
+# +++ error: YAML_LOAD_WARN_NO_REGEXP_IN_REGEXP
 # +++ yaml
 # ---
 # - !perl/regexp:
 #   foo: bar
-# 
-# === YAML_LOAD_WARN_BAD_REGEXP_ELEM 
-# +++ error: YAML_LOAD_WARN_BAD_REGEXP_ELEM 
+#
+# === YAML_LOAD_WARN_BAD_REGEXP_ELEM
+# +++ error: YAML_LOAD_WARN_BAD_REGEXP_ELEM
 # +++ yaml
 # ---
 # - !perl/regexp:
 #   REGEXP: foo
 #   foo: bar
 
-=== YAML_LOAD_WARN_GLOB_NAME 
-+++ error: YAML_LOAD_WARN_GLOB_NAME 
+=== YAML_LOAD_WARN_GLOB_NAME
++++ error: YAML_LOAD_WARN_GLOB_NAME
 +++ yaml
 ---
 - !perl/glob:
   foo: bar
 #---
-#error: xYAML_LOAD_WARN_PARSE_CODE 
+#error: xYAML_LOAD_WARN_PARSE_CODE
 #load: |
 #    ---
 #---
-#error: YAML_LOAD_WARN_CODE_DEPARSE 
+#error: YAML_LOAD_WARN_CODE_DEPARSE
 #load: |
 #    ---
 #    - !perl/code |
 #      sub { "foo" }
 #---
-#error: xYAML_EMIT_ERR_BAD_LEVEL 
+#error: xYAML_EMIT_ERR_BAD_LEVEL
 #code:
 #    #
 #---
-#error: YAML_PARSE_WARN_AMBIGUOUS_TAB 
+#error: YAML_PARSE_WARN_AMBIGUOUS_TAB
 #load: |
 #    ---
 #    - |
 #     foo
-#    	bar 
+#    	bar
 
-=== YAML_LOAD_WARN_BAD_GLOB_ELEM 
-+++ error: YAML_LOAD_WARN_BAD_GLOB_ELEM 
+=== YAML_LOAD_WARN_BAD_GLOB_ELEM
++++ error: YAML_LOAD_WARN_BAD_GLOB_ELEM
 +++ yaml
 ---
 - !perl/glob:
   NAME: foo
   bar: SHAME
 
-=== YAML_PARSE_ERR_ZERO_INDENT 
-+++ error: YAML_PARSE_ERR_ZERO_INDENT 
+=== YAML_PARSE_ERR_ZERO_INDENT
++++ error: YAML_PARSE_ERR_ZERO_INDENT
 +++ yaml
 ---
 - |0

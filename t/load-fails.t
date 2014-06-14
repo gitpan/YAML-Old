@@ -1,5 +1,9 @@
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
 # This simply tests that a given piece of invalid YAML fails to parse
-use t::TestYAMLOld tests => 4;
+use TestYAML tests => 4;
 
 filters {
     msg => 'regexp',
@@ -12,16 +16,16 @@ __DATA__
 
 ===
 +++ SKIP
-This test hangs YAML::Old
+This test hangs YAML.pm
 +++ msg
-YAML::Old Error: Inconsistent indentation level
+YAML Error: Inconsistent indentation level
 +++ yaml
 a: *
 
 
 ===
 +++ msg
-YAML::Old Error: Inconsistent indentation level
+YAML Error: Inconsistent indentation level
 +++ yaml
 --- |\
 foo\zbar
@@ -29,14 +33,14 @@ foo\zbar
 
 ===
 +++ msg
-YAML::Old Error: Unrecognized implicit value
+YAML Error: Unrecognized implicit value
 +++ yaml
 --- @ 42
 
 
 ===
 +++ msg
-YAML::Old Error: Inconsistent indentation level
+YAML Error: Inconsistent indentation level
 +++ yaml
 ---
  - 1

@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 58;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 57;
 
 no_diff();
 run_roundtrip_nyn('dumper');
@@ -91,13 +95,13 @@ vegetables:
 ===
 +++ perl
 bless {}, 'Foo::Bar'
-+++ yaml    
++++ yaml
 --- !!perl/hash:Foo::Bar {}
 
 ===
 +++ perl
 bless {qw(foo 42 bar 43)}, 'Foo::Bar'
-+++ yaml    
++++ yaml
 --- !!perl/hash:Foo::Bar
 bar: 43
 foo: 42
@@ -105,13 +109,13 @@ foo: 42
 ===
 +++ perl
 bless [], 'Foo::Bar'
-+++ yaml    
++++ yaml
 --- !!perl/array:Foo::Bar []
 
 ===
 +++ perl
 bless [map "$_",42..45], 'Foo::Bar'
-+++ yaml    
++++ yaml
 --- !!perl/array:Foo::Bar
 - 42
 - 43
@@ -125,7 +129,7 @@ $yn->{foo} = 'bar';
 $yn->{bar} = 'baz';
 $yn->{baz} = 'foo';
 $yn
-+++ yaml    
++++ yaml
 --- !foo.com/bar
 foo: bar
 bar: baz
@@ -138,7 +142,7 @@ use YAML::Old::Node;
 +++ perl
 my $a = '';
 bless \$a, 'Foo::Bark';
-+++ yaml    
++++ yaml
 --- !!perl/scalar:Foo::Bark ''
 
 === Strings with nulls
@@ -149,9 +153,9 @@ bless \$a, 'Foo::Bark';
 
 ===
 +++ no_round_trip
-XXX: probably a YAML::Old bug
+XXX: probably a YAML.pm bug
 +++ perl
-&YAML::Old::VALUE
+&YAML::VALUE
 +++ yaml
 --- =
 
@@ -232,7 +236,7 @@ return [$joe_random_global, $joe_random_global];
 package TestBless;
 use YAML::Old::Node;
 sub yaml_dump {
-    my $yn = YAML::Old::Node->new($_[0]); 
+    my $yn = YAML::Old::Node->new($_[0]);
     ynode($yn)->keys([qw(apple pear carrot)]);
     $yn->{pear} = $yn;
     return $yn;
@@ -270,7 +274,7 @@ my $joe_random_global = \\\\\\\'42';
     $$$$$$$joe_random_global,
     $$$$$$$$joe_random_global
 ]
-+++ yaml 
++++ yaml
 ---
 - &1 !!perl/ref
   =: !!perl/ref
@@ -287,7 +291,7 @@ my $joe_random_global = \\\\\\\'42';
 
 ===
 +++ perl
-local $YAML::Old::Indent = 1;
+local $YAML::Indent = 1;
 [{qw(foo 42 bar 44)}]
 +++ yaml
 ---
@@ -296,22 +300,12 @@ local $YAML::Old::Indent = 1;
 
 ===
 +++ perl
-local $YAML::Old::Indent = 4;
+local $YAML::Indent = 4;
 [{qw(foo 42 bar 44)}]
 +++ yaml
 ---
 - bar: 44
   foo: 42
-
-===
-+++ no_round_trip
-Since we don't use eval for regexp reconstitution any more (for safety
-sake) this test doesn't roundtrip even though the values are equivalent.
-+++ perl
-[qr{bozo$}i]
-+++ yaml
----
-- !!perl/regexp (?i-xsm:bozo$)
 
 ===
 +++ perl
@@ -334,9 +328,9 @@ $joe_random_global
 ===
 +++ perl
 [
-    '23', 
-    '3.45', 
-    '123456789012345', 
+    '23',
+    '3.45',
+    '123456789012345',
 ]
 +++ yaml
 ---

@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 3;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 3;
 
 SKIP: {
     skip 'fix this next release', 3;
@@ -7,7 +11,7 @@ SKIP: {
 }
 
 __END__
-03:14 < audreyt> ingy: 
+03:14 < audreyt> ingy:
 03:14 < audreyt> use YAML; my $x; print Dump bless(\$x);
 03:14 < audreyt> is erroneous
 03:14 < audreyt> then

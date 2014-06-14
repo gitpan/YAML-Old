@@ -1,4 +1,8 @@
-use t::TestYAMLOld;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML;
 
 filters {
     perl => 'eval',

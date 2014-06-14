@@ -1,35 +1,15 @@
-use t::TestYAMLOld tests => 23;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 19;
 
 run_roundtrip_nyn();
 
 __DATA__
-=== $YAML::UseHeader works
-+++ config
-local $YAML::UseHeader = 0
-+++ perl
-(['34', '45'], ['56', '67'])
-+++ yaml
-- 34
-- 45
----
-- 56
-- 67
-=== $YAML::Old::UseHeader overrides $YAML::UseHeader
-+++ config
-local $YAML::UseHeader = 0;
-local $YAML::Old::UseHeader = 1;
-+++ perl
-(['34', '45'], ['56', '67'])
-+++ yaml
----
-- 34
-- 45
----
-- 56
-- 67
 ===
 +++ config
-local $YAML::Old::UseHeader = 0
+local $YAML::UseHeader = 0
 +++ perl
 (['34', '45'], ['56', '67'])
 +++ yaml
@@ -41,17 +21,17 @@ local $YAML::Old::UseHeader = 0
 ===
 +++ no_round_trip
 +++ config
-local $YAML::Old::UseAliases = 0
+local $YAML::UseAliases = 0
 +++ perl
 my $ref = {foo => 'bar'};
 [$ref, $ref]
-+++ yaml    
++++ yaml
 ---
 - foo: bar
 - foo: bar
 ===
 +++ config
-local $YAML::Old::CompressSeries = 1
+local $YAML::CompressSeries = 1
 +++ perl
 [
     {foo => 'bar'},
@@ -69,8 +49,8 @@ local $YAML::Old::CompressSeries = 1
       silly: rabbit
 ===
 +++ config
-local $YAML::Old::CompressSeries = 0;
-local $YAML::Old::Indent = 5
+local $YAML::CompressSeries = 0;
+local $YAML::Indent = 5
 +++ perl
 [
     {one => 'fun', pun => 'none'},
@@ -91,8 +71,8 @@ local $YAML::Old::Indent = 5
                free: willy
 ===
 +++ config
-local $YAML::Old::CompressSeries = 1;
-local $YAML::Old::Indent = 5
+local $YAML::CompressSeries = 1;
+local $YAML::Indent = 5
 +++ perl
 [
     {one => 'fun', pun => 'none'},
@@ -111,7 +91,7 @@ local $YAML::Old::Indent = 5
          free: willy
 ===
 +++ config
-local $YAML::Old::Indent = 3
+local $YAML::Indent = 3
 +++ perl
 [{ one => 'two', three => 'four' }, { foo => 'bar' }, ]
 +++ yaml
@@ -121,13 +101,13 @@ local $YAML::Old::Indent = 3
 - foo: bar
 ===
 +++ config
-local $YAML::Old::CompressSeries = 1
+local $YAML::CompressSeries = 1
 +++ perl
 [
     'The',
-    {speed => 'quick', color => 'brown', &YAML::Old::VALUE => 'fox'},
+    {speed => 'quick', color => 'brown', &YAML::VALUE => 'fox'},
     'jumped over the',
-    {speed => 'lazy', &YAML::Old::VALUE, 'dog'},
+    {speed => 'lazy', &YAML::VALUE, 'dog'},
 ]
 +++ yaml
 ---
@@ -140,7 +120,7 @@ local $YAML::Old::CompressSeries = 1
   =: dog
 ===
 +++ config
-local $YAML::Old::InlineSeries = 3
+local $YAML::InlineSeries = 3
 +++ perl
 [
     ['10', '20', '30'],
@@ -158,7 +138,7 @@ local $YAML::Old::InlineSeries = 3
   - friday
 ===
 +++ config
-local $YAML::Old::SortKeys = [qw(foo bar baz)]
+local $YAML::SortKeys = [qw(foo bar baz)]
 +++ perl
 {foo=>'42',bar=>'99',baz=>'4'}
 +++ yaml

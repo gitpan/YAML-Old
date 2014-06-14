@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 6;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 6;
 
 no_diff;
 
@@ -26,11 +30,11 @@ my $yaml;
 $yaml = Dump($foo);
 is $yaml, $object_dump, "Global stringification default dump";
 
-$YAML::Old::Stringify = 1;
+$YAML::Stringify = 1;
 $yaml = Dump($foo);
 is $yaml, $stringy_dump, "Global stringification enabled dump";
 
-$YAML::Old::Stringify = 0;
+$YAML::Stringify = 0;
 $yaml = Dump($foo);
 is $yaml, $object_dump, "Global stringification disabled dump";
 

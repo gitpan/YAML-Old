@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 8;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 8;
 
 run_load_passes();
 
@@ -7,9 +11,9 @@ __DATA__
 === Bug reported by Rich Morin
 +++ SKIP
 +++ yaml
-foo:                                                                          
-  -   >                                                                       
-    This is a test.                                                           
+foo:
+  -   >
+    This is a test.
 
 === Bug reported by audreyt
 +++ SKIP

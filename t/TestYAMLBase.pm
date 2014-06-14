@@ -1,4 +1,4 @@
-package t::Base;
+package TestYAMLBase;
 
 sub new {
     my $self = bless {}, shift;

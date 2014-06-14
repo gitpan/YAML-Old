@@ -1,4 +1,8 @@
-use t::TestYAMLOld tests => 6;
+use strict;
+use File::Basename;
+use lib dirname(__FILE__);
+
+use TestYAML tests => 7;
 
 filters {
     perl => [qw'eval yaml_dump'],
@@ -66,3 +70,8 @@ sub foo {
     return "Don't eat the foo";
 }
 
+=== Single Dash
++++ perl: {foo => '-'}
++++ yaml
+---
+foo: '-'
