@@ -1,5 +1,5 @@
 package YAML::Old::Types;
-$YAML::Old::Types::VERSION = '0.93';
+$YAML::Old::Types::VERSION = '0.94';
 use YAML::Old::Mo;
 use YAML::Old::Node;
 
@@ -7,7 +7,7 @@ use YAML::Old::Node;
 # but at least they work for now.
 #-------------------------------------------------------------------------------
 package YAML::Old::Type::blessed;
-$YAML::Old::Type::blessed::VERSION = '0.93';
+$YAML::Old::Type::blessed::VERSION = '0.94';
 use YAML::Old::Mo; # XXX
 
 sub yaml_dump {
@@ -33,7 +33,7 @@ sub yaml_dump {
 
 #-------------------------------------------------------------------------------
 package YAML::Old::Type::undef;
-$YAML::Old::Type::undef::VERSION = '0.93';
+$YAML::Old::Type::undef::VERSION = '0.94';
 sub yaml_dump {
     my $self = shift;
 }
@@ -44,7 +44,7 @@ sub yaml_load {
 
 #-------------------------------------------------------------------------------
 package YAML::Old::Type::glob;
-$YAML::Old::Type::glob::VERSION = '0.93';
+$YAML::Old::Type::glob::VERSION = '0.94';
 sub yaml_dump {
     my $self = shift;
     my $ynode = YAML::Old::Node->new({}, '!perl/glob:');
@@ -112,7 +112,7 @@ sub yaml_load {
 
 #-------------------------------------------------------------------------------
 package YAML::Old::Type::code;
-$YAML::Old::Type::code::VERSION = '0.93';
+$YAML::Old::Type::code::VERSION = '0.94';
 my $dummy_warned = 0;
 my $default = '{ "DUMMY" }';
 
@@ -169,7 +169,7 @@ sub yaml_load {
 
 #-------------------------------------------------------------------------------
 package YAML::Old::Type::ref;
-$YAML::Old::Type::ref::VERSION = '0.93';
+$YAML::Old::Type::ref::VERSION = '0.94';
 sub yaml_dump {
     my $self = shift;
     YAML::Old::Node->new({(&YAML::VALUE, ${$_[0]})}, '!perl/ref')
@@ -185,7 +185,7 @@ sub yaml_load {
 
 #-------------------------------------------------------------------------------
 package YAML::Old::Type::regexp;
-$YAML::Old::Type::regexp::VERSION = '0.93';
+$YAML::Old::Type::regexp::VERSION = '0.94';
 # XXX Be sure to handle blessed regexps (if possible)
 sub yaml_dump {
     die "YAML::Old::Type::regexp::yaml_dump not currently implemented";

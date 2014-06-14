@@ -23,4 +23,4 @@ resources:
   bugtracker: https://github.com/ingydotnet/yaml-old-pm/issues
   homepage: https://github.com/ingydotnet/yaml-old-pm
   repository: https://github.com/ingydotnet/yaml-old-pm.git
-version: '0.93'
+version: '0.94'

@@ -1,6 +1,6 @@
 use strict; use warnings;
 package YAML::Old::Node;
-$YAML::Old::Node::VERSION = '0.93';
+$YAML::Old::Node::VERSION = '0.94';
 use YAML::Old::Tag;
 require YAML::Old::Mo;
 
