@@ -1,5 +1,5 @@
 package YAML::Old::Loader::Base;
-$YAML::Old::Loader::Base::VERSION = '0.94';
+
 use YAML::Old::Mo;
 
 has load_code     => default => sub {0};

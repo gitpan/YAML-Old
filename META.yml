@@ -2,7 +2,8 @@
 abstract: 'Old YAML.pm Legacy Code'
 author:
   - 'Ingy döt Net <ingy@cpan.org>'
-build_requires: {}
+build_requires:
+  Spiffy: '0'
 configure_requires:
   ExtUtils::MakeMaker: '6.30'
 dynamic_config: 0
@@ -17,10 +18,11 @@ no_index:
     - inc
     - t
     - xt
+    - example
 requires:
   perl: v5.8.1
 resources:
   bugtracker: https://github.com/ingydotnet/yaml-old-pm/issues
   homepage: https://github.com/ingydotnet/yaml-old-pm
   repository: https://github.com/ingydotnet/yaml-old-pm.git
-version: '0.94'
+version: '0.95'

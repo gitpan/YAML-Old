@@ -1,5 +1,5 @@
 package YAML::Old::Mo;
-$YAML::Old::Mo::VERSION = '0.94';
+
 # use Mo qw[builder default import];
 #   The following line of code was produced from the previous line by
 #   Mo::Inline version 0.31

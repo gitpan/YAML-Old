@@ -1,3 +1,7 @@
+0.95 Thu Jul 17 00:00:34 PDT 2014
+ - Move doc to Swim
+ - Fix Meta and add Contributing file
+
 0.94 Sat Jun 14 10:32:08 PDT 2014
  - Skip a failing test on 5.8 introduced in 0.93
 

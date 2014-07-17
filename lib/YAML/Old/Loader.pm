@@ -1,5 +1,5 @@
 package YAML::Old::Loader;
-$YAML::Old::Loader::VERSION = '0.94';
+
 use YAML::Old::Mo;
 extends 'YAML::Old::Loader::Base';
 
