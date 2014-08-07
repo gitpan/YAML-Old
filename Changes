@@ -1,3 +1,6 @@
+0.97 Thu Aug  7 00:32:03 PDT 2014
+ - Fix bad encoding in Pod
+
 0.96 Wed Aug  6 17:54:56 PDT 2014
  - Switch to external YAML-Test
 
