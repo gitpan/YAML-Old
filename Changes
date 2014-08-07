@@ -1,3 +1,6 @@
+0.96 Wed Aug  6 17:54:56 PDT 2014
+ - Switch to external YAML-Test
+
 0.95 Thu Jul 17 00:00:34 PDT 2014
  - Move doc to Swim
  - Fix Meta and add Contributing file

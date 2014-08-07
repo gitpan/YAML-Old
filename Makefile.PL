@@ -21,9 +21,9 @@ my %WriteMakefileArgs = (
   "NAME" => "YAML::Old",
   "PREREQ_PM" => {},
   "TEST_REQUIRES" => {
-    "Spiffy" => 0
+    "Test::YAML" => "0.99"
   },
-  "VERSION" => "0.95",
+  "VERSION" => "0.96",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -31,7 +31,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Spiffy" => 0
+  "Test::YAML" => "0.99"
 );
 
 

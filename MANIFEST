@@ -7,10 +7,6 @@ META.json
 META.yml
 Makefile.PL
 README
-inc/Spiffy.pm
-inc/Test/Base.pm
-inc/Test/Base/Filter.pm
-lib/Test/YAML.pm
 lib/YAML/Old.pm
 lib/YAML/Old.pod
 lib/YAML/Old/Dumper.pm
