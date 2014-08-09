@@ -1,3 +1,6 @@
+0.98 Fri Aug  8 19:00:04 PDT 2014
+ - Fixed a test that was still using YAML.pm
+
 0.97 Thu Aug  7 00:32:03 PDT 2014
  - Fix bad encoding in Pod
 
