@@ -1,3 +1,6 @@
+0.99 Fri Aug 15 21:08:20 PDT 2014
+ - Add t/000-compile-modules.t
+
 0.98 Fri Aug  8 19:00:04 PDT 2014
  - Fixed a test that was still using YAML.pm
 

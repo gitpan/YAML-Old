@@ -19,6 +19,7 @@ lib/YAML/Old/Mo.pm
 lib/YAML/Old/Node.pm
 lib/YAML/Old/Tag.pm
 lib/YAML/Old/Types.pm
+t/000-compile-modules.t
 t/2-scalars.t
 t/TestYAML.pm
 t/TestYAMLBase.pm
